@@ -1,0 +1,18 @@
+api:
+  base_url: "https://v3.football.api-sports.io"
+  endpoints:
+    fixtures: "/fixtures"
+
+data:
+  landing: "/app/data/0_landing"
+  bronze: "/app/data/1_bronze"
+  silver: "/app/data/2_silver"
+  gold: "/app/data/3_gold"
+
+extraction_params:
+  season: 2024
+  leagues:
+    # LPF 
+    - 128
+    # Brasileirao
+    - 71 

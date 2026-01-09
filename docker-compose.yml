@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+  # Motor de procesamiento de datos
+  data_engine:
+    build: ./data_engine
+    container_name: football_data_engine
+    env_file:
+      - .env  
+    volumes:
+      - ./data_engine:/app
+    command: tail -f /dev/null
+
+  
+  # Servicio de inteligencia artificial
+  intelligence_service:
+    build: ./intelligence_service
+    container_name: football_ai_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai_service:/app
+      - ./data_engine/data/3_gold:/data/gold # El agente necesita leer la data procesada
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - data_engine
